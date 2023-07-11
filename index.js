@@ -1,9 +1,12 @@
 const express = require('express')
-const app = express()
 const cors = require('cors')
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
+const putMethod = require('./Methods/putMethod')
+const getMethod = require('./Methods/getMethod')
+const deleteMethod = require('./Methods/deleteMethod')
+const app = express()
 require('dotenv').config()
 const port = process.env.PORT || 5000
-
 // middleware
 const corsOptions = {
   origin: '*',
@@ -13,8 +16,9 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.json())
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
-const uri = `mongodb+srv://<username>:<password>@cluster0.darcm8e.mongodb.net/?retryWrites=true&w=majority`;
+
+
+const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_PASS}@cluster0.darcm8e.mongodb.net/?retryWrites=true&w=majority`;
 
 
 const client = new MongoClient(uri, {
@@ -30,7 +34,11 @@ async function run() {
     const usersCollection = client.db('aircncDb').collection('users')
     const roomsCollection = client.db('aircncDb').collection('rooms')
     const bookingsCollection = client.db('aircncDb').collection('bookings')
-
+    
+    putMethod(app, usersCollection);
+    getMethod(app, usersCollection);
+    deleteMethod(app);
+    
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 })
     console.log(
@@ -42,10 +50,6 @@ async function run() {
   }
 }
 run().catch(console.dir)
-
-app.get('/', (req, res) => {
-  res.send('AirCNC Server is running..')
-})
 
 app.listen(port, () => {
   console.log(`AirCNC is running on port ${port}`)

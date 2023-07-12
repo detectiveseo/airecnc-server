@@ -4,6 +4,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const putMethod = require('./Methods/putMethod')
 const getMethod = require('./Methods/getMethod')
 const deleteMethod = require('./Methods/deleteMethod')
+const postMethod = require('./Methods/postMethod')
 const app = express()
 require('dotenv').config()
 const port = process.env.PORT || 5000
@@ -37,6 +38,7 @@ async function run() {
     
     putMethod(app, usersCollection);
     getMethod(app, usersCollection);
+    postMethod(app, roomsCollection);
     deleteMethod(app);
     
     // Send a ping to confirm a successful connection

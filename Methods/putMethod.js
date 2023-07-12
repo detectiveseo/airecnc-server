@@ -8,8 +8,7 @@ module.exports = putMethod = (app, usersCollection) => {
         const updateDoc = {
             $set: user
         }
-        const result = await usersCollection.updateOne(query, updateDoc, options)
-        console.log(result);
+        const result = await usersCollection.updateOne(query, updateDoc, options);
         res.send(result);
     })
 }

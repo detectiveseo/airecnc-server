@@ -1,6 +1,6 @@
-module.exports = getMethod = (app,usersCollection) => {
-    app.get("/", async(req, res) => {
-        const result = await usersCollection.find().toArray();
-        res.send(result)
+module.exports = getMethod = (app, usersCollection, roomsCollection) => {
+    app.get("/all-rooms", async (req, res) => {
+        const result = await roomsCollection.find().toArray();
+        res.send(result);
     })
 }

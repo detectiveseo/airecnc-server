@@ -37,7 +37,7 @@ async function run() {
     const bookingsCollection = client.db('aircncDb').collection('bookings')
     
     putMethod(app, usersCollection);
-    getMethod(app, usersCollection);
+    getMethod(app, usersCollection , roomsCollection);
     postMethod(app, roomsCollection);
     deleteMethod(app);
     

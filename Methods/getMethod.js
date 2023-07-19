@@ -13,4 +13,15 @@ module.exports = getMethod = (app, usersCollection, roomsCollection) => {
         const result = await roomsCollection.find(query).toArray();
         res.send(result);
     })
+
+    //user get method
+    app.get("/user/:email", async (req, res) => {
+        console.log("hitted")
+        const email = req.params.email;
+        console.log(email);
+        const query = {email: email};
+        const result = await usersCollection.findOne(query);
+        console.log(result);
+        res.send(result);
+    })
 }

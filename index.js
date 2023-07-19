@@ -5,6 +5,7 @@ const putMethod = require('./Methods/putMethod')
 const getMethod = require('./Methods/getMethod')
 const deleteMethod = require('./Methods/deleteMethod')
 const postMethod = require('./Methods/postMethod')
+const patchMethod = require('./Methods/patchMethod')
 const app = express()
 require('dotenv').config()
 const port = process.env.PORT || 5000
@@ -39,6 +40,7 @@ async function run() {
     putMethod(app, usersCollection);
     getMethod(app, usersCollection , roomsCollection);
     postMethod(app, roomsCollection);
+    patchMethod(app, usersCollection);
     deleteMethod(app);
     
     // Send a ping to confirm a successful connection
